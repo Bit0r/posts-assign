@@ -1,0 +1,18 @@
+{
+	"semi": false,
+	"useTabs": true,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"arrowParens": "avoid",
+	"sortImports": {
+		"partitionByNewline": true
+	},
+	"sortTailwindcss": true,
+	"jsdoc": {
+		"commentLineStrategy": "keep",
+		"preferCodeFences": true,
+	},
+	"ignorePatterns": [
+		"!clawhub.js"
+	]
+}

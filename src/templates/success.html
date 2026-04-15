@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+	<title>Success</title>
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/gardevoir" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+	<style>
+		body {
+			font-family:
+				system-ui,
+				-apple-system,
+				sans-serif;
+			background-color: #f3f4f6;
+			display: grid;
+			place-items: center;
+			height: 100vh;
+			margin: 0;
+		}
+
+		.card {
+			display: grid;
+			gap: 1rem;
+			background: white;
+			padding: 2.5rem 2rem;
+			border-radius: 12px;
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+			width: 100%;
+			max-width: 450px;
+			text-align: center;
+			box-sizing: border-box;
+		}
+
+		h1 {
+			color: #059669;
+			margin: 0;
+			font-size: 1.75rem;
+		}
+
+		p {
+			color: #4b5563;
+			margin: 0;
+		}
+
+		.comment-box {
+			background-color: #f8fafc;
+			border: 1px solid #e2e8f0;
+			padding: 1.25rem;
+			border-radius: 8px;
+			font-family: monospace;
+			font-size: 1.1rem;
+			color: #0f172a;
+			margin: 0;
+			word-wrap: break-word;
+			min-width: 0;
+		}
+
+		.copy-container {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 0.5rem;
+			align-items: center;
+			text-align: left;
+		}
+
+		.copy-btn {
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 0.5rem;
+			border-radius: 6px;
+			color: #64748b;
+			display: inline-grid;
+			place-items: center;
+		}
+
+		.copy-btn:hover {
+			background-color: #e2e8f0;
+			color: #0f172a;
+		}
+
+		.section-label {
+			text-align: left;
+			font-size: 0.875rem;
+			color: #64748b;
+			font-weight: 600;
+			margin-bottom: -0.5rem;
+		}
+
+		.title-section {
+			display: grid;
+			gap: 1rem;
+		}
+
+		.title-section[data-has-title="false"] {
+			display: none;
+		}
+
+		a.back-btn {
+			display: inline-grid;
+			justify-self: center;
+			color: #2563eb;
+			text-decoration: none;
+			font-weight: 500;
+		}
+
+		a.back-btn:hover {
+			text-decoration: underline;
+		}
+
+		.text-success {
+			color: #059669;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="card">
+		<h1>🎉 Claimed Successfully</h1>
+		<p>Your Worker ID: {{WORKER_ID}}.</p>
+		<p>
+			Please copy your exclusive content below:
+		</p>
+
+		<div class="title-section"
+			data-has-title="{{HAS_TITLE}}">
+			<div class="section-label">Title</div>
+			<div class="copy-container">
+				<div class="comment-box" id="title-text">
+					{{TITLE}}
+				</div>
+				<button class="copy-btn"
+					data-copy-target="#title-text"
+					aria-label="Copy Title">
+					<i class="fa-regular fa-copy"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="section-label">Content</div>
+		<div class="copy-container">
+			<div class="comment-box" id="content-text">
+				{{COMMENT}}
+			</div>
+			<button class="copy-btn"
+				data-copy-target="#content-text"
+				aria-label="Copy Content">
+				<i class="fa-regular fa-copy"></i>
+			</button>
+		</div>
+
+		<a href="/?job_id={{JOB_ID}}" class="back-btn">←
+			Back to Home</a>
+	</div>
+
+	<script>
+		document.querySelectorAll('.copy-btn').forEach(btn => {
+			btn.addEventListener('click', async () => {
+				const targetSelector = btn.getAttribute('data-copy-target')
+				const targetEl = document.querySelector(targetSelector)
+				if (targetEl) {
+					try {
+						await navigator.clipboard.writeText(targetEl.textContent.trim())
+						const originalHtml = btn.innerHTML
+						// Success checkmark SVG
+						btn.innerHTML = '<i class="fa-solid fa-check text-success"></i>'
+						setTimeout(() => {
+							btn.innerHTML = originalHtml
+						}, 2000)
+					} catch (err) {
+						console.error('Failed to copy', err)
+					}
+				}
+			})
+		});
+	</script>
+</body>
+
+</html>

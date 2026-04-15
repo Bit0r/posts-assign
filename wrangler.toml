@@ -1,0 +1,14 @@
+name="posts-task"
+main="src/index.js"
+compatibility_date="2026-04-01"
+
+# 绑定 D1 数据库
+[[d1_databases]]
+	binding="DB"
+	database_name="posts"
+	# database_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# 允许将 HTML 作为字符串模板导入代码中
+[[rules]]
+	type="Text"
+	globs=["**/*.html", "**/*.sql"]
