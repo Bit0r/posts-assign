@@ -6,9 +6,23 @@ compatibility_date="2026-04-01"
 [[d1_databases]]
 	binding="DB"
 	database_name="posts"
-	# database_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+	database_id="8b8125c4-fdab-4045-96f4-cadbd655a9b5"
+	# preview_database_id="DB"
+
+[[routes]]
+	pattern="flyapi.site"
+	zone_name="flyapi.site"
+	custom_domain=true
 
 # 允许将 HTML 作为字符串模板导入代码中
 [[rules]]
 	type="Text"
 	globs=["**/*.html", "**/*.sql"]
+
+[observability]
+	[observability.logs]
+		enabled=true
+		invocation_logs=true
+
+	[observability.traces]
+		enabled=true

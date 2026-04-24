@@ -34,7 +34,7 @@ export default {
 		if (request.method === 'GET' && url.pathname === '/') {
 			// 如果 URL 中没有 job_id 参数，直接提示错误
 			if (!url.searchParams.has('job_id')) {
-				return renderIndex('Please access via the correct link, it should contain ?job_id=...!')
+				return renderIndex('Please access via the correct link, it should contain "?job_id=...!"')
 			}
 
 			// 将 job_id 保存到 cookie 中，前端表单提交时会自动带上，后端可以通过 cookie 获取到 job_id，避免用户篡改表单中的 job_id 字段

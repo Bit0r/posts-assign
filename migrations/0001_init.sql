@@ -1,3 +1,4 @@
+-- Migration number: 0001 	 2026-04-24T10:04:52.629Z
 CREATE TABLE jobs (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	-- 要求用户操作的URLs

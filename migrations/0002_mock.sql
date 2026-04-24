@@ -1,3 +1,4 @@
+-- Migration number: 0002 	 2026-04-24T10:06:09.758Z
 INSERT INTO
 	jobs (urls, customer)
 VALUES
