@@ -12,6 +12,19 @@ function escapeHtml(text) {
 		.replaceAll("'", '&#39;')
 }
 
+function safeExternalUrl(text) {
+	const value = typeof text === 'string' ? text.trim() : ''
+	if (!value) return ''
+
+	try {
+		const url = new URL(value)
+		if (url.protocol !== 'http:' && url.protocol !== 'https:') return ''
+		return url.href
+	} catch {
+		return ''
+	}
+}
+
 export default {
 	async fetch(request, env) {
 		const url = new URL(request.url)
@@ -122,11 +135,14 @@ export default {
 				// 无论是查重还是新分配，最终都能拿到一条记录，记录里有 content 和可能有 title 字段
 				finalComment = result.content
 				const finalTitle = result.title
+				const finalUrl = safeExternalUrl(result.url)
 
 				// 4. 渲染成功页面
 				const finalHtml = successTemplate
 					.replace('{{HAS_TITLE}}', finalTitle ? 'true' : 'false')
+					.replace('{{HAS_URL}}', finalUrl ? 'true' : 'false')
 					.replace('{{TITLE}}', escapeHtml(finalTitle || ''))
+					.replaceAll('{{URL}}', escapeHtml(finalUrl))
 					.replace('{{COMMENT}}', escapeHtml(finalComment))
 					.replace('{{JOB_ID}}', escapeHtml(jobId))
 					.replace('{{WORKER_ID}}', escapeHtml(workerId))

@@ -19,7 +19,7 @@
 			background-color: #f3f4f6;
 			display: grid;
 			place-items: center;
-			height: 100vh;
+			min-height: 100vh;
 			margin: 0;
 		}
 
@@ -31,7 +31,7 @@
 			border-radius: 12px;
 			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 			width: 100%;
-			max-width: 450px;
+			max-width: 960px;
 			text-align: center;
 			box-sizing: border-box;
 		}
@@ -45,6 +45,36 @@
 		p {
 			color: #4b5563;
 			margin: 0;
+		}
+
+		.worker-id {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			gap: 0.75rem;
+			align-items: center;
+			justify-self: center;
+			color: #4b5563;
+			font-size: 0.95rem;
+			max-width: 100%;
+		}
+
+		.worker-id-value {
+			background-color: #f1f5f9;
+			border: 1px solid #cbd5e1;
+			border-radius: 6px;
+			color: #0f172a;
+			font-family:
+				ui-monospace,
+				SFMono-Regular,
+				Menlo,
+				Monaco,
+				Consolas,
+				monospace;
+			font-size: 1rem;
+			font-weight: 600;
+			min-width: 0;
+			padding: 0.35rem 0.6rem;
+			word-break: break-word;
 		}
 
 		.comment-box {
@@ -101,6 +131,37 @@
 			display: none;
 		}
 
+		.url-section {
+			display: grid;
+			gap: 0.5rem;
+		}
+
+		.url-section[data-has-url="false"] {
+			display: none;
+		}
+
+		.url-link {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 0.75rem;
+			align-items: center;
+			background-color: #eff6ff;
+			border: 1px solid #bfdbfe;
+			border-radius: 8px;
+			color: #1d4ed8;
+			font-size: 0.95rem;
+			padding: 1rem;
+			text-align: left;
+			text-decoration: none;
+			word-break: break-word;
+			overflow-wrap: anywhere;
+		}
+
+		.url-link:hover {
+			background-color: #dbeafe;
+			text-decoration: none;
+		}
+
 		a.back-btn {
 			display: inline-grid;
 			justify-self: center;
@@ -116,13 +177,41 @@
 		.text-success {
 			color: #059669;
 		}
+
+		@media (min-width: 768px) {
+			body {
+				padding: 1.5rem;
+				box-sizing: border-box;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.worker-id {
+				grid-template-columns: 1fr;
+				gap: 0.4rem;
+			}
+		}
 	</style>
 </head>
 
 <body>
 	<div class="card">
 		<h1>🎉 Claimed Successfully</h1>
-		<p>Your Worker ID: {{WORKER_ID}}.</p>
+		<div class="worker-id">
+			<span>Your Worker ID</span>
+			<span class="worker-id-value">{{WORKER_ID}}</span>
+		</div>
+
+		<div class="url-section"
+			data-has-url="{{HAS_URL}}">
+			<div class="section-label">Target URL</div>
+			<a class="url-link" href="{{URL}}" target="_blank"
+				rel="noopener noreferrer">
+				<span>{{URL}}</span>
+				<i class="fa-solid fa-arrow-up-right-from-square"></i>
+			</a>
+		</div>
+
 		<p>
 			Please copy your exclusive content below:
 		</p>

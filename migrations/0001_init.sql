@@ -17,6 +17,8 @@ CREATE TABLE posts (
 	content TEXT NOT NULL,
 	-- 帖子标题
 	title TEXT,
+	-- 指定发帖或评论的 URL
+	url TEXT,
 	-- 领取人
 	claimed_by VARCHAR(255),
 	-- 禁止删除已有的工作，但允许修改工作的要求和任务领取人
