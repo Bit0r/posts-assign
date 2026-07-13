@@ -1,4 +1,5 @@
 .wrangler/
+csv/
 .env*
 *.csv
 *.xlsx
